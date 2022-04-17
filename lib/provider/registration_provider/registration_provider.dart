@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 
-class LoginProvider extends ChangeNotifier {
-  bool _isHide = true;
+class RegistrationProvider extends ChangeNotifier {
   final TextEditingController _email = TextEditingController();
+  final TextEditingController _phone = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
-  bool get isHide => _isHide;
   TextEditingController get email => _email;
   TextEditingController get password => _password;
-
-  void showPassword() {
-    _isHide = !_isHide;
-    print("call");
-    notifyListeners();
-  }
+  TextEditingController get phone => _phone;
 }

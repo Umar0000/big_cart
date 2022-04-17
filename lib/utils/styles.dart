@@ -11,16 +11,32 @@ var welcomeFontStyle = TextStyle(
     fontWeight: bold, letterSpacing: 1, fontSize: 20, fontFamily: popin);
 
 var textFieldStyle =
-    TextStyle(fontFamily: popin, color: lightgrey, fontSize: 12);
+    TextStyle(fontFamily: popin, color: lightgrey, fontSize: 15);
+var rememberStyle = TextStyle(fontFamily: popin, color: lightgrey);
 
 var loginSubtitleStyle = TextStyle(color: lightgrey, fontSize: 13);
+var heading = TextStyle(
+  color: white,
+  fontSize: 20,
+  fontFamily: popin,
+  fontWeight: FontWeight.bold,
+);
+var heading2 = TextStyle(
+  color: Colors.black,
+  fontSize: 20,
+  fontFamily: popin,
+  fontWeight: FontWeight.bold,
+);
+
+var subtotalStyle = TextStyle(color: lightgrey, fontFamily: popin);
 //=======================================================================================
 //              TODO : emaiL field Decoration Login
 //=======================================================================================
 
-InputDecoration decorationHintStyle(String hint, String icon_path) {
+InputDecoration decorationHintStyle(
+    String hint, String icon_path, IconData icon) {
   return InputDecoration(
-    contentPadding: const EdgeInsets.only(top: 13),
+    contentPadding: const EdgeInsets.only(top: 14),
     hintText: hint,
     hintStyle: textFieldStyle,
     errorStyle: TextStyle(color: Colors.red),
@@ -36,7 +52,13 @@ InputDecoration decorationHintStyle(String hint, String icon_path) {
       borderRadius: BorderRadius.circular(5.0),
       borderSide: BorderSide(color: white, width: 0),
     ),
-    prefixIcon: Icon(Icons.email_outlined),
+    prefixIcon: !icon_path.isEmpty
+        ? Image.asset(
+            icon_path,
+            width: 8,
+            height: 8,
+          )
+        : Icon(icon),
   );
 }
 
@@ -47,7 +69,7 @@ InputDecoration decorationHintStyle(String hint, String icon_path) {
 InputDecoration decorationPasswordHintStyle(
     String hint, String icon_path, Widget icon) {
   return InputDecoration(
-    contentPadding: const EdgeInsets.only(top: 13),
+    contentPadding: const EdgeInsets.only(top: 11),
     hintText: hint,
     hintStyle: textFieldStyle,
     prefixIcon: const Icon(Icons.lock),
@@ -66,7 +88,8 @@ InputDecoration decorationPasswordHintStyle(
 //              TODO : Colors
 //=======================================================================================
 
-var lightgrey = const Color(0xff868889);
-var fogotTextColor = const Color(0xff407EC7);
-
-var white = Colors.white;
+const lightgrey = Color(0xff868889);
+const fogotTextColor = Color(0xff407EC7);
+const screenbg = Color(0xffF4F5F9);
+const white = Colors.white;
+const green = Color(0xff6CC51D);

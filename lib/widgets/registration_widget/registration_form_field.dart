@@ -1,15 +1,14 @@
-import 'package:big_cart/provider/login_provider/login_provider.dart';
+import 'package:big_cart/provider/registration_provider/registration_provider.dart';
 import 'package:big_cart/screens/login_screen.dart';
-import 'package:big_cart/widgets/custome_widget/custome_btn.dart';
-import 'package:big_cart/widgets/login_widget/widget_email_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-import '../../utils/styles.dart';
-import 'login_footer.dart';
+import '../custome_widget/custome_btn.dart';
+import '../login_widget/login_footer.dart';
+import '../login_widget/widget_email_textField.dart';
 
-class LoginFormField extends StatelessWidget {
+class RegistrationFromField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(child: Builder(
@@ -29,14 +28,32 @@ class LoginFormField extends StatelessWidget {
               inputType: TextInputType.emailAddress,
               hintText: "Email Address",
               iconPath: "images/ic_email.png",
-              controller: Provider.of<LoginProvider>(context).email,
+              controller: Provider.of<RegistrationProvider>(context).email,
               icon: Icons.email_outlined,
             ),
             const SizedBox(
               height: 5,
             ),
+            CustomeEditText(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return "Please Enter your Phone";
+                } else if (!value.startsWith("03")) {
+                  return "Invalid Phone Number";
+                }
+                return null;
+              },
+              inputType: TextInputType.phone,
+              hintText: "Phone number",
+              iconPath: "images/ic_call.png",
+              controller: Provider.of<RegistrationProvider>(context).phone,
+              icon: Icons.call,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
             PasswordEditText(
-              controller: Provider.of<LoginProvider>(context).password,
+              controller: Provider.of<RegistrationProvider>(context).password,
               validator: (value) {
                 if (value.isEmpty) {
                   return "Please Enter your Password";
@@ -46,33 +63,8 @@ class LoginFormField extends StatelessWidget {
                 return null;
               },
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      Switch(value: false, onChanged: (value) {}),
-                      Text(
-                        "Remember me",
-                        style: rememberStyle,
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                    flex: 0,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Forgor password",
-                        style: TextStyle(color: Colors.blue, fontFamily: popin),
-                      ),
-                    ))
-              ],
-            ),
             CustomeButton(
-                title: "Login",
+                title: "Signup",
                 onPress: () {
                   Form.of(context)?.validate();
                 }),
@@ -80,8 +72,8 @@ class LoginFormField extends StatelessWidget {
               height: 10,
             ),
             LoginFotter(
-                loginSingUpText: "Sign Up",
-                sentenceText: "Don't have an account ? ",
+                loginSingUpText: "Login",
+                sentenceText: "Already have an account ? ",
                 onPress: () {
                   Navigator.pushReplacement(
                     context,
@@ -89,11 +81,11 @@ class LoginFormField extends StatelessWidget {
                       duration: const Duration(milliseconds: 800),
                       type: PageTransitionType.leftToRight,
                       child: const LoginScreen(
-                        isRegistrationScrren: true,
+                        isRegistrationScrren: false,
                       ),
                     ),
                   );
-                  // Navigator.of(context).pushNamed(RegistrationPath);
+                  // Navigator.of(context).pushNamed(LoginPath);
                 })
           ],
         );
