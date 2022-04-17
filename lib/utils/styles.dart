@@ -89,6 +89,7 @@ InputDecoration decorationPasswordHintStyle(
 //=======================================================================================
 
 const lightgrey = Color(0xff868889);
+
 const fogotTextColor = Color(0xff407EC7);
 const screenbg = Color(0xffF4F5F9);
 const white = Colors.white;

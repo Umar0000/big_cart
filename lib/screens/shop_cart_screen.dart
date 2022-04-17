@@ -1,7 +1,6 @@
-import 'dart:math' as math;
-
 import 'package:big_cart/widgets/custome_widget/custome_app_bar.dart';
 import 'package:big_cart/widgets/custome_widget/custome_btn.dart';
+import 'package:big_cart/widgets/shop_cart_widget/product_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -26,22 +25,23 @@ class ShopCartScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Container(
+            SizedBox(
               height: 350,
               child: ListView.builder(
                   itemCount: list.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 20),
                       color: white,
                       child: Slidable(
                         endActionPane: ActionPane(
-                          motion: ScrollMotion(),
+                          motion: const ScrollMotion(),
                           extentRatio: 0.2,
                           children: [
                             SlidableAction(
                               onPressed: (_) {},
-                              backgroundColor: Color(0xFFFE4A49),
+                              backgroundColor: const Color(0xFFFE4A49),
                               foregroundColor: Colors.white,
                               icon: Icons.delete,
                             ),
@@ -51,36 +51,15 @@ class ShopCartScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    width: 60,
-                                    height: 60,
-                                    decoration: BoxDecoration(
-                                        color: Color(
-                                                (math.Random().nextDouble() *
-                                                        0xFFFFFF)
-                                                    .toInt())
-                                            .withOpacity(0.2),
-                                        borderRadius:
-                                            BorderRadius.circular(50)),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 10),
-                                    child: Image.asset(
-                                      "images/ic_broccoli.png",
-                                      width: 60,
-                                      height: 70,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            ProductImages(
+                                imagePath: "images/ic_broccoli.png",
+                                imageWidth: 60,
+                                imageHeight: 70,
+                                circleWidth: 60,
+                                circleHeight: 60),
                             Expanded(
                               child: Container(
-                                margin: EdgeInsets.only(left: 10),
+                                margin: const EdgeInsets.only(left: 10),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,7 +79,7 @@ class ShopCartScreen extends StatelessWidget {
                                     ),
                                     Text(
                                       list[index].calories!,
-                                      style: TextStyle(color: lightgrey),
+                                      style: const TextStyle(color: lightgrey),
                                     ),
                                   ],
                                 ),
@@ -108,6 +87,7 @@ class ShopCartScreen extends StatelessWidget {
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 IconButton(
                                     onPressed: () {},
@@ -118,12 +98,11 @@ class ShopCartScreen extends StatelessWidget {
                                 const Center(
                                     child: Text(
                                   "5",
-                                  textAlign: TextAlign.center,
                                 )),
                                 IconButton(
                                     onPressed: () {},
                                     icon: const Icon(
-                                      Icons.maximize,
+                                      Icons.remove,
                                       color: green,
                                     ))
                               ],

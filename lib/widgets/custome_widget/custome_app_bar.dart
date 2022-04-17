@@ -47,9 +47,15 @@ class CustomeAppBar extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 25, right: 10),
                   child: Align(
                       alignment: Alignment.centerRight,
-                      child: Image.asset(
-                        "images/ic_filter.png",
-                        height: 10,
+                      child: InkWell(
+                        splashColor: lightgrey,
+                        hoverColor: lightgrey,
+                        onTap: onFilterPress,
+                        child: Image.asset(
+                          "images/ic_filter.png",
+                          height: 20,
+                          width: 20,
+                        ),
                       )),
                 )
               : Container()
