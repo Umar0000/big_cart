@@ -21,24 +21,17 @@ class FutureBuilderWisgets extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else {
-            return Expanded(
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                height: MediaQuery.of(context).size.height,
-                child: GridView.builder(
-                    itemCount: snapshot.data?.length ?? 0,
-                    shrinkWrap: true,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 5.0,
-                            mainAxisSpacing: 5.0,
-                            mainAxisExtent: 260),
-                    itemBuilder: (context, index) {
-                      return ProductItem(data: snapshot.data?[index]);
-                    }),
-              ),
-            );
+            return GridView.builder(
+                itemCount: snapshot.data?.length ?? 0,
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 5.0,
+                    mainAxisSpacing: 5.0,
+                    mainAxisExtent: 265),
+                itemBuilder: (context, index) {
+                  return ProductItem(data: snapshot.data?[index]);
+                });
           }
         });
   }

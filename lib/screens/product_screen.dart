@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductScreen extends StatelessWidget {
-  const ProductScreen({Key? key}) : super(key: key);
+  final String title;
+  const ProductScreen({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +13,19 @@ class ProductScreen extends StatelessWidget {
       body: Column(
         children: [
           CustomeAppBar(
-              title: "Vegitable",
-              onBackPress: () {},
+              title: title,
+              onBackPress: () {
+                Navigator.pop(context);
+              },
               isFilterVIsible: true,
               onFilterPress: () {}),
           const SizedBox(
             height: 20,
           ),
-          const FutureBuilderWisgets()
+          Expanded(
+              child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 5),
+                  child: const FutureBuilderWisgets()))
         ],
       ),
     );

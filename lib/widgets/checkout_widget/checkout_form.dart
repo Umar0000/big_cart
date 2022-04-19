@@ -1,3 +1,4 @@
+import 'package:big_cart/utils/route_constant.dart';
 import 'package:big_cart/widgets/custome_widget/custome_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -139,7 +140,10 @@ class CheckoutForm extends StatelessWidget {
                   title: "Next",
                   onPress: () {
                     var isValidate = Form.of(context)?.validate();
-                    if (isValidate!) {}
+                    if (isValidate!) {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, SuccessScreenPath, (route) => false);
+                    }
                   }),
               const SizedBox(
                 height: 20,

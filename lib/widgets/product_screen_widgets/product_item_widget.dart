@@ -2,6 +2,7 @@ import 'package:big_cart/models/item_models/item_model.dart';
 import 'package:big_cart/widgets/shop_cart_widget/product_images.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../../utils/styles.dart';
 
@@ -65,24 +66,38 @@ class ProductItem extends StatelessWidget {
             height: 1,
             width: double.infinity,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.add,
-                    color: green,
-                  )),
-              Text("5"),
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.remove,
-                    color: green,
-                  )),
-            ],
+          Slidable(
+            endActionPane: ActionPane(
+              motion: const ScrollMotion(),
+              extentRatio: 0.4,
+              children: [
+                SlidableAction(
+                  onPressed: (_) {},
+                  backgroundColor: Colors.lightGreen,
+                  foregroundColor: Colors.white,
+                  icon: Icons.shopping_bag_outlined,
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.add,
+                      color: green,
+                    )),
+                Text("5"),
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.remove,
+                      color: green,
+                    )),
+              ],
+            ),
           )
         ],
       ),

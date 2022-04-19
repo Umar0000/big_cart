@@ -5,3 +5,4 @@ const String CheckoutPath = '/checkout';
 const String SuccessScreenPath = '/successScreen';
 const String ShoppingCartPath = '/shoppingCart';
 const String ProductScreenPath = '/ProductScreen';
+const String HomeScreenPath = '/HomeScreen';

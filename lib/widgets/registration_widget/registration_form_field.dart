@@ -67,6 +67,13 @@ class RegistrationFromField extends StatelessWidget {
                 title: "Signup",
                 onPress: () {
                   Form.of(context)?.validate();
+                  Navigator.pushReplacement(
+                    context,
+                    PageTransition(
+                        duration: const Duration(milliseconds: 800),
+                        type: PageTransitionType.leftToRight,
+                        child: const LoginScreen(isRegistrationScrren: false)),
+                  );
                 }),
             const SizedBox(
               height: 10,

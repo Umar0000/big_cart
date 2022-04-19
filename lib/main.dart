@@ -1,7 +1,9 @@
 import 'package:big_cart/provider/check_provider/checkout_provider.dart';
+import 'package:big_cart/provider/home_screen_provider/home_screen_provider.dart';
 import 'package:big_cart/provider/login_provider/login_provider.dart';
 import 'package:big_cart/provider/registration_provider/registration_provider.dart';
 import 'package:big_cart/provider/shop_cart_provider/shop_cart_provider.dart';
+import 'package:big_cart/screens/HomeScreen.dart';
 import 'package:big_cart/screens/checkout_screen.dart';
 import 'package:big_cart/screens/login_screen.dart';
 import 'package:big_cart/screens/product_screen.dart';
@@ -28,6 +30,9 @@ class MyApp extends StatelessWidget {
             value: LoginProvider(),
           ),
           ChangeNotifierProvider.value(
+            value: HomeScreenProvider(),
+          ),
+          ChangeNotifierProvider.value(
             value: RegistrationProvider(),
           ),
           ChangeNotifierProvider.value(
@@ -42,7 +47,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.green,
           ),
-          initialRoute: ShoppingCartPath,
+          initialRoute: SplashPath,
           routes: {
             SplashPath: (context) => SplashScreen(),
             LoginPath: (context) => const LoginScreen(
@@ -54,7 +59,10 @@ class MyApp extends StatelessWidget {
             CheckoutPath: (context) => const CheckOutScreen(),
             SuccessScreenPath: (context) => const SuccessScreen(),
             ShoppingCartPath: (context) => const ShopCartScreen(),
-            ProductScreenPath: (context) => const ProductScreen(),
+            ProductScreenPath: (context) => const ProductScreen(
+                  title: "",
+                ),
+            HomeScreenPath: (context) => HomeScreen(),
           },
         ));
   }

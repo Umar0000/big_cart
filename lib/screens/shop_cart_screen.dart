@@ -1,8 +1,10 @@
+import 'package:big_cart/screens/checkout_screen.dart';
 import 'package:big_cart/widgets/custome_widget/custome_app_bar.dart';
 import 'package:big_cart/widgets/custome_widget/custome_btn.dart';
 import 'package:big_cart/widgets/shop_cart_widget/product_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../mouckData/mouckData.dart';
 import '../utils/styles.dart';
@@ -20,7 +22,9 @@ class ShopCartScreen extends StatelessWidget {
               title: "Shopping Cart",
               isFilterVIsible: false,
               onFilterPress: () {},
-              onBackPress: () {},
+              onBackPress: () {
+                Navigator.pop(context);
+              },
             ),
             const SizedBox(
               height: 10,
@@ -180,7 +184,17 @@ class ShopCartScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    CustomeButton(title: "Checkout", onPress: () {})
+                    CustomeButton(
+                        title: "Checkout",
+                        onPress: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                                duration: const Duration(milliseconds: 800),
+                                type: PageTransitionType.leftToRight,
+                                child: const CheckOutScreen()),
+                          );
+                        })
                   ],
                 ),
               ),

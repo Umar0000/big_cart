@@ -1,5 +1,6 @@
 import 'package:big_cart/provider/login_provider/login_provider.dart';
 import 'package:big_cart/screens/login_screen.dart';
+import 'package:big_cart/utils/route_constant.dart';
 import 'package:big_cart/widgets/custome_widget/custome_btn.dart';
 import 'package:big_cart/widgets/login_widget/widget_email_textField.dart';
 import 'package:flutter/material.dart';
@@ -75,6 +76,8 @@ class LoginFormField extends StatelessWidget {
                 title: "Login",
                 onPress: () {
                   Form.of(context)?.validate();
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, HomeScreenPath, (route) => false);
                 }),
             const SizedBox(
               height: 10,
