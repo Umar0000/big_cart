@@ -1,3 +1,5 @@
+import 'package:big_cart/models/cataories_model/cat_model_one/categories_model_one.dart';
+import 'package:big_cart/utils/enums.dart';
 import 'package:big_cart/widgets/product_screen_widgets/product_item_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -5,7 +7,10 @@ import '../../models/item_models/item_model.dart';
 import '../../mouckData/mouckData.dart';
 
 class FutureBuilderWisgets extends StatelessWidget {
-  const FutureBuilderWisgets({Key? key}) : super(key: key);
+  Future<CategoriesModelOne>? categories;
+  Resource resource;
+  FutureBuilderWisgets({Key? key, this.categories, required this.resource})
+      : super(key: key);
   Future<List<Item>> getData() async {
     var response = await list;
     return response;

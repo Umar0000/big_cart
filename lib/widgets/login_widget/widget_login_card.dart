@@ -10,17 +10,17 @@ class LoginCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.all(8.0),
-        decoration: const BoxDecoration(
-            color: Color(0xffF4F5F9),
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(20), topLeft: Radius.circular(20))),
-        width: MediaQuery.of(context).size.width,
-        // height: MediaQuery.of(context).size.height,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      decoration: const BoxDecoration(
+          color: Color(0xffF4F5F9),
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+      width: MediaQuery.of(context).size.width,
+      // height: MediaQuery.of(context).size.height,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const SizedBox(

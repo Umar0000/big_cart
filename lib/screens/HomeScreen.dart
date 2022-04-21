@@ -1,4 +1,5 @@
 import 'package:big_cart/screens/shop_cart_screen.dart';
+import 'package:big_cart/utils/enums.dart';
 import 'package:big_cart/utils/styles.dart';
 import 'package:big_cart/widgets/home_screen_widget/heading_with_icon_widget.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,11 @@ class HomeScreen extends StatelessWidget {
               HeadingWithIcon(title: "Categories", onPress: () {}),
               CategoriesWidget(),
               HeadingWithIcon(title: "Feature products", onPress: () {}),
-              Container(height: 500, child: FutureBuilderWisgets())
+              Container(
+                  height: 500,
+                  child: FutureBuilderWisgets(
+                    resource: Resource.MainFeature,
+                  ))
             ],
           ),
         ),

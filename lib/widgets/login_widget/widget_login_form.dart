@@ -1,20 +1,23 @@
-import 'package:big_cart/provider/login_provider/login_provider.dart';
+import 'package:big_cart/screens/HomeScreen.dart';
 import 'package:big_cart/screens/login_screen.dart';
-import 'package:big_cart/utils/route_constant.dart';
 import 'package:big_cart/widgets/custome_widget/custome_btn.dart';
 import 'package:big_cart/widgets/login_widget/widget_email_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
+import '../../provider/login_provider/login_provider.dart';
+import '../../utils/golbal_function_veriables.dart';
 import '../../utils/styles.dart';
 import 'login_footer.dart';
 
 class LoginFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<LoginProvider>(context, listen: true);
+
     return Form(child: Builder(
-      builder: (context) {
+      builder: (cxt) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -30,23 +33,31 @@ class LoginFormField extends StatelessWidget {
               inputType: TextInputType.emailAddress,
               hintText: "Email Address",
               iconPath: "images/ic_email.png",
-              controller: Provider.of<LoginProvider>(context).email,
+              controller: provider.email,
               icon: Icons.email_outlined,
+              onchange: (String value) {},
             ),
             const SizedBox(
               height: 5,
             ),
             PasswordEditText(
-              controller: Provider.of<LoginProvider>(context).password,
+              controller: provider.password,
               validator: (value) {
                 if (value.isEmpty) {
                   return "Please Enter your Password";
-                } else if (value.length < 7) {
+                } else if (value.length < 6) {
                   return "Password enter at-least 6 character";
                 }
                 return null;
               },
+              onchange: (String value) {},
             ),
+            const SizedBox(
+              height: 5,
+            ),
+            provider.isLoading
+                ? const CircularProgressIndicator()
+                : Container(),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -75,9 +86,28 @@ class LoginFormField extends StatelessWidget {
             CustomeButton(
                 title: "Login",
                 onPress: () {
-                  Form.of(context)?.validate();
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, HomeScreenPath, (route) => false);
+                  var isValidate = Form.of(cxt)?.validate();
+                  if (isValidate!) {
+                    print(provider.email.text);
+                    print(provider.password.text);
+                    provider
+                        .sendLoginRegistrationRequest(
+                            false, provider.email.text, provider.password.text)
+                        .then((value) {
+                      if (value == "Success") {
+                        Navigator.pushReplacement(
+                          context,
+                          PageTransition(
+                            duration: const Duration(milliseconds: 800),
+                            type: PageTransitionType.leftToRight,
+                            child: HomeScreen(),
+                          ),
+                        );
+                      } else {
+                        showToast(value);
+                      }
+                    });
+                  }
                 }),
             const SizedBox(
               height: 10,
@@ -96,7 +126,6 @@ class LoginFormField extends StatelessWidget {
                       ),
                     ),
                   );
-                  // Navigator.of(context).pushNamed(RegistrationPath);
                 })
           ],
         );

@@ -25,7 +25,7 @@ class CustomeButton extends StatelessWidget {
               ])),
           child: Center(
               child: Text(
-            "Login",
+            title,
             style: TextStyle(color: white, fontFamily: popin, fontWeight: bold),
           )),
         ));

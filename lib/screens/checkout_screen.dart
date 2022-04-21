@@ -23,7 +23,7 @@ class CheckOutScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          const Expanded(child: CheckoutForm())
+          Expanded(child: CheckoutForm())
         ],
       ),
     );

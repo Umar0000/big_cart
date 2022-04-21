@@ -41,6 +41,10 @@ dependencies:
   flutter_slidable: ^1.2.0
   favorite_button: ^0.0.4
   flutter_svg: ^1.0.3
+  http: ^0.13.4
+  fluttertoast: ^8.0.7
+  easy_mask: ^2.0.1
+  shared_preferences: ^2.0.13
 dev_dependencies:
   flutter_test:
     sdk: flutter
