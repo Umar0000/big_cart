@@ -6,3 +6,6 @@ const String SuccessScreenPath = '/successScreen';
 const String ShoppingCartPath = '/shoppingCart';
 const String ProductScreenPath = '/ProductScreen';
 const String HomeScreenPath = '/HomeScreen';
+const String Dashboard_path = '/dashBoard';
+const String searchProderPath = '/searchProduct';
+const String orderScreenPath = '/OrderScreen';

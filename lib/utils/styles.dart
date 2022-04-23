@@ -27,6 +27,12 @@ var heading2 = TextStyle(
   fontFamily: popin,
   fontWeight: FontWeight.bold,
 );
+var heading3 = TextStyle(
+  color: Colors.black,
+  fontSize: 15,
+  fontFamily: popin,
+  fontWeight: FontWeight.bold,
+);
 
 var subtotalStyle = TextStyle(color: lightgrey, fontFamily: popin);
 //=======================================================================================

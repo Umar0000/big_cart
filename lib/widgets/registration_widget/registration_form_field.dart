@@ -1,11 +1,12 @@
 import 'package:big_cart/provider/login_provider/login_provider.dart';
 import 'package:big_cart/provider/registration_provider/registration_provider.dart';
 import 'package:big_cart/screens/login_screen.dart';
+import 'package:big_cart/utils/golbal_function_veriables.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-import '../../screens/HomeScreen.dart';
+import '../../screens/dashboard.dart';
 import '../custome_widget/custome_btn.dart';
 import '../login_widget/login_footer.dart';
 import '../login_widget/widget_email_textField.dart';
@@ -93,7 +94,7 @@ class RegistrationFromField extends StatelessWidget {
                           PageTransition(
                             duration: const Duration(milliseconds: 800),
                             type: PageTransitionType.leftToRight,
-                            child: HomeScreen(),
+                            child: Dashboard(),
                           ),
                         );
                       }
@@ -107,16 +108,11 @@ class RegistrationFromField extends StatelessWidget {
                 loginSingUpText: "Login",
                 sentenceText: "Already have an account ? ",
                 onPress: () {
-                  Navigator.pushReplacement(
-                    context,
-                    PageTransition(
-                      duration: const Duration(milliseconds: 800),
-                      type: PageTransitionType.leftToRight,
-                      child: const LoginScreen(
+                  pushReplacement(
+                      context,
+                      const LoginScreen(
                         isRegistrationScrren: false,
-                      ),
-                    ),
-                  );
+                      ));
                   // Navigator.of(context).pushNamed(LoginPath);
                 })
           ],

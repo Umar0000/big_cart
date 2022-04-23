@@ -1,17 +1,34 @@
-import 'package:big_cart/models/item_models/item_model.dart';
+import 'package:big_cart/models/product_model/product_model.dart';
+import 'package:big_cart/provider/shop_cart_provider/shop_cart_provider.dart';
 import 'package:big_cart/widgets/shop_cart_widget/product_images.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
 
+import '../../models/item_models/item_model.dart';
+import '../../provider/product_provider/product_provider.dart';
 import '../../utils/styles.dart';
 
-class ProductItem extends StatelessWidget {
-  Item? data;
-  ProductItem({Key? key, required this.data}) : super(key: key);
+class ProductItem extends StatefulWidget {
+  ProductData? data;
+  final int index;
+  ProductItem({Key? key, required this.data, required this.index})
+      : super(key: key);
+
+  @override
+  State<ProductItem> createState() => _ProductItemState();
+}
+
+class _ProductItemState extends State<ProductItem> {
+  int itemCount = 1;
+  bool isIncrementDisable = false;
+  bool isDecrimenttDisable = false;
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<ProductProvider>(context, listen: false);
+    var provider2 = Provider.of<ShopCartProvider>(context, listen: false);
     return Card(
       elevation: 10,
       child: Column(
@@ -43,21 +60,21 @@ class ProductItem extends StatelessWidget {
             ],
           ),
           ProductImages(
-              imagePath: data?.imageUrl ?? "",
+              imagePath: widget.data?.image ?? "",
               imageWidth: 80,
               imageHeight: 90,
               circleWidth: 70,
               circleHeight: 70),
           Text(
-            data?.price ?? "",
+            widget.data?.unit.toString() ?? "",
             style: TextStyle(color: green, fontFamily: popin),
           ),
           Text(
-            data?.title ?? "",
-            style: heading2,
+            widget.data?.title ?? "",
+            style: heading3,
           ),
           Text(
-            data?.calories ?? "",
+            "\$${widget.data?.price.toString()}",
             style: TextStyle(color: lightgrey, fontFamily: popin),
           ),
           Container(
@@ -66,37 +83,87 @@ class ProductItem extends StatelessWidget {
             height: 1,
             width: double.infinity,
           ),
-          Slidable(
-            endActionPane: ActionPane(
-              motion: const ScrollMotion(),
-              extentRatio: 0.4,
-              children: [
-                SlidableAction(
-                  onPressed: (_) {},
-                  backgroundColor: Colors.lightGreen,
-                  foregroundColor: Colors.white,
-                  icon: Icons.shopping_bag_outlined,
+          Expanded(
+            child: Container(
+              child: Slidable(
+                endActionPane: ActionPane(
+                  motion: const ScrollMotion(),
+                  extentRatio: 0.4,
+                  children: [
+                    SlidableAction(
+                      onPressed: (_) {
+                        provider2.listAdd(Item(
+                            imageUrl: widget.data!.image,
+                            title: widget.data!.title,
+                            price: widget.data!.price.toString(),
+                            stock: widget.data!.stockAvailable,
+                            calories: widget.data!.unit,
+                            itemCount: itemCount));
+                      },
+                      backgroundColor: Colors.lightGreen,
+                      foregroundColor: Colors.white,
+                      icon: Icons.shopping_bag_outlined,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.add,
-                      color: green,
-                    )),
-                Text("5"),
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.remove,
-                      color: green,
-                    )),
-              ],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        onPressed: !isIncrementDisable
+                            ? () {
+                                setState(() {
+                                  var qty = widget.data!.stockAvailable;
+                                  if (itemCount <= qty!.toInt()) {
+                                    itemCount++;
+                                    isIncrementDisable = false;
+                                    isDecrimenttDisable = false;
+                                  } else {
+                                    isDecrimenttDisable = false;
+                                    isIncrementDisable = true;
+                                  }
+                                });
+                              }
+                            : null,
+                        icon: isIncrementDisable
+                            ? const Icon(
+                                Icons.add,
+                                color: lightgrey,
+                              )
+                            : const Icon(
+                                Icons.add,
+                                color: green,
+                              )),
+                    Text(itemCount.toString()),
+                    IconButton(
+                      onPressed: !isDecrimenttDisable
+                          ? () {
+                              setState(() {
+                                if (itemCount > 1) {
+                                  itemCount--;
+                                  isDecrimenttDisable = false;
+                                  isIncrementDisable = false;
+                                } else {
+                                  isDecrimenttDisable = true;
+                                  isIncrementDisable = false;
+                                }
+                              });
+                            }
+                          : null,
+                      icon: isDecrimenttDisable
+                          ? const Icon(
+                              Icons.remove,
+                              color: lightgrey,
+                            )
+                          : const Icon(
+                              Icons.remove,
+                              color: green,
+                            ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           )
         ],

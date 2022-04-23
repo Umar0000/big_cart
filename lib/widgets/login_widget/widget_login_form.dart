@@ -1,4 +1,4 @@
-import 'package:big_cart/screens/HomeScreen.dart';
+import 'package:big_cart/screens/dashboard.dart';
 import 'package:big_cart/screens/login_screen.dart';
 import 'package:big_cart/widgets/custome_widget/custome_btn.dart';
 import 'package:big_cart/widgets/login_widget/widget_email_textField.dart';
@@ -65,22 +65,24 @@ class LoginFormField extends StatelessWidget {
                   child: Row(
                     children: [
                       Switch(value: false, onChanged: (value) {}),
-                      Text(
-                        "Remember me",
-                        style: rememberStyle,
+                      Expanded(
+                        child: Text(
+                          "Remember me",
+                          style: rememberStyle,
+                        ),
                       ),
                     ],
                   ),
                 ),
                 Expanded(
-                    flex: 0,
                     child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Forgor password",
-                        style: TextStyle(color: Colors.blue, fontFamily: popin),
-                      ),
-                    ))
+                  onPressed: () {},
+                  child: Text(
+                    "Forgor password",
+                    style: TextStyle(
+                        color: Colors.blue, fontFamily: popin, fontSize: 13),
+                  ),
+                ))
               ],
             ),
             CustomeButton(
@@ -100,7 +102,7 @@ class LoginFormField extends StatelessWidget {
                           PageTransition(
                             duration: const Duration(milliseconds: 800),
                             type: PageTransitionType.leftToRight,
-                            child: HomeScreen(),
+                            child: Dashboard(),
                           ),
                         );
                       } else {
@@ -116,16 +118,11 @@ class LoginFormField extends StatelessWidget {
                 loginSingUpText: "Sign Up",
                 sentenceText: "Don't have an account ? ",
                 onPress: () {
-                  Navigator.pushReplacement(
-                    context,
-                    PageTransition(
-                      duration: const Duration(milliseconds: 800),
-                      type: PageTransitionType.leftToRight,
-                      child: const LoginScreen(
+                  pushReplacement(
+                      context,
+                      const LoginScreen(
                         isRegistrationScrren: true,
-                      ),
-                    ),
-                  );
+                      ));
                 })
           ],
         );

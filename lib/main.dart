@@ -1,14 +1,18 @@
 import 'package:big_cart/provider/check_provider/checkout_provider.dart';
+import 'package:big_cart/provider/drawe_provider/drawer_provider.dart';
 import 'package:big_cart/provider/home_screen_provider/home_screen_provider.dart';
 import 'package:big_cart/provider/login_provider/login_provider.dart';
 import 'package:big_cart/provider/product_provider/product_provider.dart';
 import 'package:big_cart/provider/registration_provider/registration_provider.dart';
 import 'package:big_cart/provider/shop_cart_provider/shop_cart_provider.dart';
 import 'package:big_cart/provider/user_provider/user_provider.dart';
-import 'package:big_cart/screens/HomeScreen.dart';
 import 'package:big_cart/screens/checkout_screen.dart';
+import 'package:big_cart/screens/dashboard.dart';
+import 'package:big_cart/screens/home_screen.dart';
 import 'package:big_cart/screens/login_screen.dart';
+import 'package:big_cart/screens/order_screen.dart';
 import 'package:big_cart/screens/product_screen.dart';
+import 'package:big_cart/screens/search_product_screen.dart';
 import 'package:big_cart/screens/shop_cart_screen.dart';
 import 'package:big_cart/screens/splash_screen.dart';
 import 'package:big_cart/screens/success_screen.dart';
@@ -49,6 +53,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider.value(
             value: UserProvider(),
           ),
+          ChangeNotifierProvider.value(
+            value: DrawerProvider(),
+          ),
         ],
         child: MaterialApp(
           title: 'Flutter Demo',
@@ -66,7 +73,10 @@ class MyApp extends StatelessWidget {
                 ),
             CheckoutPath: (context) => const CheckOutScreen(),
             SuccessScreenPath: (context) => const SuccessScreen(),
-            ShoppingCartPath: (context) => const ShopCartScreen(),
+            searchProderPath: (context) => SearchProductScreen(),
+            ShoppingCartPath: (context) => ShopCartScreen(),
+            orderScreenPath: (context) => OrderScreen(),
+            Dashboard_path: (context) => Dashboard(),
             ProductScreenPath: (context) => ProductScreen(
                   title: "",
                 ),

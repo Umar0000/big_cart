@@ -1,3 +1,4 @@
+import 'package:big_cart/utils/golbal_function_veriables.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,6 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+
     goToMainSCreen();
   }
 
@@ -99,7 +101,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void goToMainSCreen() async {
+    var user = await getUser();
     await Future.delayed(const Duration(seconds: 4));
-    Navigator.pushNamedAndRemoveUntil(context, LoginPath, (route) => false);
+    user.email != null
+        ? Navigator.pushNamedAndRemoveUntil(
+            context, Dashboard_path, (route) => false)
+        : Navigator.pushNamedAndRemoveUntil(
+            context, LoginPath, (route) => false);
   }
 }

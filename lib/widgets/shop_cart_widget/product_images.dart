@@ -31,7 +31,7 @@ class ProductImages extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 13),
-            child: Image.asset(
+            child: Image.network(
               imagePath ?? "",
               width: imageWidth,
               height: imageHeight,

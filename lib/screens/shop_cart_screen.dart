@@ -2,18 +2,22 @@ import 'package:big_cart/screens/checkout_screen.dart';
 import 'package:big_cart/widgets/custome_widget/custome_app_bar.dart';
 import 'package:big_cart/widgets/custome_widget/custome_btn.dart';
 import 'package:big_cart/widgets/shop_cart_widget/product_images.dart';
+import 'package:big_cart/widgets/shop_cart_widget/quantity_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
-import '../mouckData/mouckData.dart';
+import '../provider/shop_cart_provider/shop_cart_provider.dart';
 import '../utils/styles.dart';
 
 class ShopCartScreen extends StatelessWidget {
-  const ShopCartScreen({Key? key}) : super(key: key);
+  bool isIncrementDisable = false;
+  bool isDecrimenttDisable = false;
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<ShopCartProvider>(context, listen: false);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -32,7 +36,7 @@ class ShopCartScreen extends StatelessWidget {
             SizedBox(
               height: 350,
               child: ListView.builder(
-                  itemCount: list.length,
+                  itemCount: provider.list.length,
                   itemBuilder: (context, index) {
                     return Container(
                       margin: const EdgeInsets.symmetric(
@@ -44,7 +48,9 @@ class ShopCartScreen extends StatelessWidget {
                           extentRatio: 0.2,
                           children: [
                             SlidableAction(
-                              onPressed: (_) {},
+                              onPressed: (_) {
+                                provider.removeItem(index);
+                              },
                               backgroundColor: const Color(0xFFFE4A49),
                               foregroundColor: Colors.white,
                               icon: Icons.delete,
@@ -56,7 +62,8 @@ class ShopCartScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             ProductImages(
-                                imagePath: "images/ic_broccoli.png",
+                                imagePath:
+                                    provider.list[index].imageUrl.toString(),
                                 imageWidth: 60,
                                 imageHeight: 70,
                                 circleWidth: 60,
@@ -69,48 +76,27 @@ class ShopCartScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      list[index].price!,
+                                      provider.getListItem(index).price!,
                                       style: const TextStyle(
                                         color: green,
                                       ),
                                     ),
                                     Text(
-                                      list[index].title!,
+                                      provider.getListItem(index).title!,
                                       style: TextStyle(
                                           fontWeight: bold,
                                           fontFamily: popin,
                                           color: Colors.black),
                                     ),
                                     Text(
-                                      list[index].calories!,
+                                      provider.getListItem(index).calories!,
                                       style: const TextStyle(color: lightgrey),
                                     ),
                                   ],
                                 ),
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.add,
-                                      color: green,
-                                    )),
-                                const Center(
-                                    child: Text(
-                                  "5",
-                                )),
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.remove,
-                                      color: green,
-                                    ))
-                              ],
-                            ),
+                            QuatityWidget(index: index)
                           ],
                         ),
                       ),

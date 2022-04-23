@@ -20,21 +20,7 @@ class LoginProvider extends ChangeNotifier {
     prefs.setString("email", user?.email ?? "null");
     prefs.setInt("id", user?.id ?? 0);
     prefs.setString("phone", user?.email ?? "null");
-    prefs.setString("token", user?.email ?? "null");
-  }
-
-  Future<Data> getUser() async {
-    final SharedPreferences prefs = await _prefs;
-    return Data(
-        id: prefs.getInt("id"),
-        phone: prefs.getString("phone"),
-        accessToken: prefs.getString("token"),
-        email: prefs.getString("email"));
-  }
-
-  void logout() async {
-    final SharedPreferences prefs = await _prefs;
-    prefs.clear();
+    prefs.setString("token", user?.accessToken ?? "null");
   }
 
   Data? user;

@@ -28,8 +28,8 @@ class ProductScreen extends StatelessWidget {
               child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 5),
                   child: FutureBuilderWisgets(
-                    categories: provider.getCategories(id),
                     resource: Resource.Product,
+                    allProduct: provider.getAllProduct(),
                   )))
         ],
       ),
