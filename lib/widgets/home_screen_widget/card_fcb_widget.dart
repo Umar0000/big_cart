@@ -13,16 +13,27 @@ class CardFloatingBtn extends StatelessWidget {
     var provider2 = Provider.of<ShopCartProvider>(context, listen: true);
     return FloatingActionButton(
       onPressed: () {
-        Navigator.push(
-            context,
-            PageTransition(
-                duration: const Duration(milliseconds: 800),
-                type: PageTransitionType.leftToRight,
-                child: ShopCartScreen()));
+        if (provider2.list.isNotEmpty) {
+          // for (var i in provider2.list) {
+          //   provider2.setPrice(i.price!.toInt());
+          //   // provider2.setTotalPrice(i.price!.toInt());
+          // }
+          Navigator.push(
+              context,
+              PageTransition(
+                  duration: const Duration(milliseconds: 800),
+                  type: PageTransitionType.leftToRight,
+                  child: ShopCartScreen()));
+        }
       },
       foregroundColor: green,
       child: Badge(
-          badgeContent: Text(provider2.list.length.toString()),
+          badgeContent: Text(
+            provider2.list.length.toString(),
+            style: TextStyle(
+              color: white,
+            ),
+          ),
           child: Image.asset("images/ic_bag.png")),
     );
   }

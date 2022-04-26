@@ -55,7 +55,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
             ),
           ),
           Expanded(
-              child: FutureBuilderWisgets(
+              child: FutureBuilderWidgets(
                   resource: Resource.MainFeature,
                   allProduct: provider.getSearch(controller.text)))
         ],

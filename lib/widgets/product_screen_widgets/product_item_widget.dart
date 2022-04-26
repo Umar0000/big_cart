@@ -60,11 +60,12 @@ class _ProductItemState extends State<ProductItem> {
             ],
           ),
           ProductImages(
-              imagePath: widget.data?.image ?? "",
-              imageWidth: 80,
-              imageHeight: 90,
-              circleWidth: 70,
-              circleHeight: 70),
+            imagePath: widget.data?.image ?? "",
+            imageWidth: 80,
+            imageHeight: 90,
+            circleWidth: 70,
+            circleHeight: 70,
+          ),
           Text(
             widget.data?.unit.toString() ?? "",
             style: TextStyle(color: green, fontFamily: popin),
@@ -92,13 +93,16 @@ class _ProductItemState extends State<ProductItem> {
                   children: [
                     SlidableAction(
                       onPressed: (_) {
+                        provider2.setPrice(widget.data!.price!.toInt());
                         provider2.listAdd(Item(
+                            id: widget.data!.id,
+                            catId: widget.data!.catId,
                             imageUrl: widget.data!.image,
                             title: widget.data!.title,
-                            price: widget.data!.price.toString(),
+                            price: widget.data!.price,
                             stock: widget.data!.stockAvailable,
-                            calories: widget.data!.unit,
-                            itemCount: itemCount));
+                            unit: widget.data!.unit,
+                            qty: itemCount));
                       },
                       backgroundColor: Colors.lightGreen,
                       foregroundColor: Colors.white,
@@ -114,6 +118,9 @@ class _ProductItemState extends State<ProductItem> {
                         onPressed: !isIncrementDisable
                             ? () {
                                 setState(() {
+                                  provider2
+                                      .setPrice(widget.data!.price!.toInt());
+
                                   var qty = widget.data!.stockAvailable;
                                   if (itemCount <= qty!.toInt()) {
                                     itemCount++;

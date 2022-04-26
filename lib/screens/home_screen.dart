@@ -38,7 +38,7 @@ class HomeScreen extends StatelessWidget {
               HeadingWithIcon(title: "Feature products", onPress: () {}),
               Container(
                   height: 500,
-                  child: FutureBuilderWisgets(
+                  child: FutureBuilderWidgets(
                       resource: Resource.MainFeature,
                       allProduct: provider.getAllProduct()))
             ],

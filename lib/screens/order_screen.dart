@@ -26,7 +26,7 @@ class OrderScreen extends StatelessWidget {
               ),
               Container(
                   height: 500,
-                  child: FutureBuilderWisgets(
+                  child: FutureBuilderWidgets(
                     resource: Resource.MainFeature,
                     allProduct: provider.getAllProduct(),
                   ))

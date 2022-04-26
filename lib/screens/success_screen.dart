@@ -53,6 +53,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
 
   void goToMainSCreen() async {
     await Future.delayed(const Duration(seconds: 4));
-    Navigator.pushNamedAndRemoveUntil(context, LoginPath, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, Dashboard_path, (route) => false);
   }
 }

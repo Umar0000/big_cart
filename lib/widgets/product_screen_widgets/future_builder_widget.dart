@@ -5,10 +5,10 @@ import 'package:big_cart/widgets/product_screen_widgets/product_item_widget.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class FutureBuilderWisgets extends StatelessWidget {
+class FutureBuilderWidgets extends StatelessWidget {
   Future<List<ProductData>?> allProduct;
   Resource resource;
-  FutureBuilderWisgets(
+  FutureBuilderWidgets(
       {Key? key, required this.resource, required this.allProduct})
       : super(key: key);
 

@@ -5,4 +5,5 @@ class Url {
   static const Registration_URL = '${Url.BaseUrl}/user';
   static const CATEGORIE_URL = '${Url.BaseUrl}/category/';
   static const ALL_PRODUCT = '${Url.BaseUrl}/product';
+  static const CREATE_ORDER = '${Url.BaseUrl}/order';
 }

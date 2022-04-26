@@ -1,4 +1,4 @@
-import 'package:big_cart/utils/route_constant.dart';
+import 'package:big_cart/provider/shop_cart_provider/shop_cart_provider.dart';
 import 'package:big_cart/widgets/custome_widget/custome_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,16 +6,11 @@ import 'package:provider/provider.dart';
 import '../../provider/check_provider/checkout_provider.dart';
 import '../login_widget/widget_email_textField.dart';
 
-class CheckoutForm extends StatefulWidget {
-  CheckoutForm({Key? key}) : super(key: key);
-
-  @override
-  State<CheckoutForm> createState() => _CheckoutFormState();
-}
-
-class _CheckoutFormState extends State<CheckoutForm> {
+class CheckoutForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<CheckOutProvider>(context);
+    var provider2 = Provider.of<ShopCartProvider>(context);
     return Form(child: Builder(builder: (context) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -30,7 +25,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
 
                   return null;
                 },
-                controller: Provider.of<CheckOutProvider>(context).name,
+                controller: provider.name,
                 inputType: TextInputType.name,
                 iconPath: "images/ic_person.png",
                 icon: Icons.person_outline,
@@ -51,7 +46,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                   }
                   return null;
                 },
-                controller: Provider.of<CheckOutProvider>(context).email,
+                controller: provider.email,
                 inputType: TextInputType.name,
                 iconPath: "images/ic_email.png",
                 icon: Icons.person_outline,
@@ -72,7 +67,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                   }
                   return null;
                 },
-                controller: Provider.of<CheckOutProvider>(context).phone,
+                controller: provider.phone,
                 inputType: TextInputType.name,
                 iconPath: "images/ic_call.png",
                 icon: Icons.person_outline,
@@ -89,7 +84,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                   }
                   return null;
                 },
-                controller: Provider.of<CheckOutProvider>(context).address,
+                controller: provider.address,
                 inputType: TextInputType.name,
                 iconPath: "images/ic_address.png",
                 icon: Icons.person_outline,
@@ -106,7 +101,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                   }
                   return null;
                 },
-                controller: Provider.of<CheckOutProvider>(context).zipCode,
+                controller: provider.zipCode,
                 inputType: TextInputType.name,
                 iconPath: "images/ic_zip.png",
                 icon: Icons.person_outline,
@@ -124,7 +119,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
 
                   return null;
                 },
-                controller: Provider.of<CheckOutProvider>(context).city,
+                controller: provider.city,
                 inputType: TextInputType.name,
                 iconPath: "images/ic_city.png",
                 icon: Icons.person_outline,
@@ -142,7 +137,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
 
                   return null;
                 },
-                controller: Provider.of<CheckOutProvider>(context).country,
+                controller: provider.country,
                 inputType: TextInputType.name,
                 iconPath: "images/ic_country.png",
                 icon: Icons.person_outline,
@@ -155,11 +150,10 @@ class _CheckoutFormState extends State<CheckoutForm> {
               CustomeButton(
                   title: "Next",
                   onPress: () {
-                    var isValidate = Form.of(context)?.validate();
-                    if (isValidate!) {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, SuccessScreenPath, (route) => false);
-                    }
+                    // var isValidate = Form.of(context)?.validate();
+                    // if (isValidate!) {
+                    provider.createOrder(provider2.list, context);
+                    // }
                   }),
               const SizedBox(
                 height: 20,

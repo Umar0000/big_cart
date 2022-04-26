@@ -27,7 +27,7 @@ class ProductScreen extends StatelessWidget {
           Expanded(
               child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 5),
-                  child: FutureBuilderWisgets(
+                  child: FutureBuilderWidgets(
                     resource: Resource.Product,
                     allProduct: provider.getAllProduct(),
                   )))

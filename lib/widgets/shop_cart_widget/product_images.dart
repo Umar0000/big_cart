@@ -1,6 +1,9 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/shop_cart_provider/shop_cart_provider.dart';
 
 class ProductImages extends StatelessWidget {
   final String? imagePath;
@@ -8,15 +11,19 @@ class ProductImages extends StatelessWidget {
   final double imageHeight;
   final double circleWidth;
   final double circleHeight;
-  ProductImages(
-      {required this.imagePath,
-      required this.imageWidth,
-      required this.imageHeight,
-      required this.circleWidth,
-      required this.circleHeight});
+
+  ProductImages({
+    required this.imagePath,
+    required this.imageWidth,
+    required this.imageHeight,
+    required this.circleWidth,
+    required this.circleHeight,
+  });
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<ShopCartProvider>(context, listen: false);
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: Stack(
