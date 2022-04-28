@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math' as math;
 
 import 'package:big_cart/models/item_models/item_model.dart';
 import 'package:big_cart/utils/golbal_function_veriables.dart';
@@ -48,13 +49,14 @@ class CheckOutProvider extends ChangeNotifier {
       map["unit"] = e.unit;
       map["stockAvailable"] = e.stock;
       map["image"] = e.imageUrl;
+      map["color"] = (math.Random().nextDouble() * 0xFFFFFF).toInt().toString();
       map["price"] = e.price;
       map["qty"] = e.qty;
       list2.add(map);
     }
-    var json = jsonEncode(list2);
-    print(json);
-    var body = {
+    // var json = jsonEncode(list2);
+    print(user.accessToken!);
+    var body = <String, dynamic>{
       "name": _name.text,
       "email": _email.text,
       "phoneNumber": _phone.text,
@@ -62,16 +64,19 @@ class CheckOutProvider extends ChangeNotifier {
       "zip": _zipCode.text,
       "city": _city.text,
       "country": _country.text,
-      "items": json,
+      "items": list2,
     };
-    http.Response response = await http.post(
-      Uri.parse(Url.CREATE_ORDER),
-      // Send authorization headers to the backend.
-      headers: {
-        HttpHeaders.authorizationHeader: user.accessToken!,
-      },
-      body: body,
-    );
+    var json2 = jsonEncode(body);
+    print(json2);
+    print(Url.CREATE_ORDER);
+
+    http.Response response = await http.post(Uri.parse(Url.CREATE_ORDER),
+        // Send authorization headers to the backend.
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          HttpHeaders.authorizationHeader: user.accessToken!,
+        },
+        body: json2);
     print(response.body);
     if (response.statusCode == 200) {
       pushName(context, const SuccessScreen());

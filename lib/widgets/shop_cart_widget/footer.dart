@@ -9,9 +9,11 @@ import '../../utils/styles.dart';
 import '../custome_widget/custome_btn.dart';
 
 class Fotter extends StatelessWidget {
-  const Fotter({
-    Key? key,
-  }) : super(key: key);
+  final bool isCheckoutScreen;
+  int? price;
+
+  Fotter({Key? key, required this.isCheckoutScreen, this.price})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +32,12 @@ class Fotter extends StatelessWidget {
                   "subtotal",
                   style: subtotalStyle,
                 ),
-                Text(
-                  "\$${provider.price}",
-                  style: subtotalStyle,
-                )
+                isCheckoutScreen
+                    ? Text(
+                        "\$${provider.price}",
+                        style: subtotalStyle,
+                      )
+                    : Text(price.toString())
               ],
             ),
             const SizedBox(
@@ -70,12 +74,14 @@ class Fotter extends StatelessWidget {
                   "Total",
                   style: heading2,
                 ),
-                provider.price == 0
-                    ? const Text("\$0")
-                    : Text(
-                        "\$${provider.price + 50}",
-                        style: heading2,
-                      )
+                isCheckoutScreen
+                    ? provider.price == 0
+                        ? const Text("\$0")
+                        : Text(
+                            "\$${provider.price + 50}",
+                            style: heading2,
+                          )
+                    : Text("\$${price!.toInt() + 50}")
               ],
             ),
             const SizedBox(

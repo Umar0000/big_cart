@@ -2,6 +2,7 @@ import 'package:big_cart/provider/check_provider/checkout_provider.dart';
 import 'package:big_cart/provider/drawe_provider/drawer_provider.dart';
 import 'package:big_cart/provider/home_screen_provider/home_screen_provider.dart';
 import 'package:big_cart/provider/login_provider/login_provider.dart';
+import 'package:big_cart/provider/order_provider/order_provider.dart';
 import 'package:big_cart/provider/product_provider/product_provider.dart';
 import 'package:big_cart/provider/registration_provider/registration_provider.dart';
 import 'package:big_cart/provider/shop_cart_provider/shop_cart_provider.dart';
@@ -55,6 +56,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider.value(
             value: DrawerProvider(),
+          ),
+          ChangeNotifierProvider.value(
+            value: OrderProvider(),
           ),
         ],
         child: MaterialApp(

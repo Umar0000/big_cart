@@ -11,7 +11,6 @@ import '../utils/enums.dart';
 import '../widgets/drawer_layout_widget/drawer_layout.dart';
 
 class Dashboard extends StatelessWidget {
-  // final _advancedDrawerController = AdvancedDrawerController();
   TextEditingController search = TextEditingController();
 
   @override
@@ -37,14 +36,4 @@ class Dashboard extends StatelessWidget {
       );
     });
   }
-  // Widget screenChange(Screen screen) {
-  //   if (screen == Screen.HomeScreen) {
-  //     setState(() {
-  //
-  //     });
-  //     return Dashboard();
-  //   } else {
-  //     return OrderScreen();
-  //   }
-  // }
 }

@@ -15,12 +15,13 @@ class LoginProvider extends ChangeNotifier {
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  void saveUser(Data? user) async {
+  Future<String> saveUser(Data? user) async {
     final SharedPreferences prefs = await _prefs;
     prefs.setString("email", user?.email ?? "null");
     prefs.setInt("id", user?.id ?? 0);
     prefs.setString("phone", user?.email ?? "null");
     prefs.setString("token", user?.accessToken ?? "null");
+    return "Save";
   }
 
   Data? user;
@@ -45,7 +46,8 @@ class LoginProvider extends ChangeNotifier {
       var loginResponse = LoginResponse.fromJson(
           jsonDecode(await response.stream.bytesToString()));
       user = loginResponse.data;
-      saveUser(user);
+      var s = await saveUser(user);
+      print(s);
       isLoading = false;
       notifyListeners();
       return loginResponse.message.toString();
